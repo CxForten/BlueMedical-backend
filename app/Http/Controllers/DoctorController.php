@@ -6,6 +6,8 @@ use App\Models\Doctor;
 use Exception;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use App\Models\AppointmentRequest;
+use App\Models\Schedule;
 
 class DoctorController extends Controller
 {
@@ -209,11 +211,47 @@ class DoctorController extends Controller
         }
     }
 
-    public function update(Request $request, Doctor $doctor)
+/*     public function cancelarCita($id)
     {
+        // Encuentra la cita por su ID
+        $cita = AppointmentRequest::find($id);
+
+        if (!$cita) {
+            return response()->json(['mensaje' => 'Cita no encontrada'], 404);
+        }
+
+        // Aplica la lógica de cancelación
+        $cita->state= 0;
+        $cita->save();
+
+        return response()->json(['mensaje' => 'Cita cancelada ']);
+}
+public function aceptarCita($id)
+    {
+        $cita = AppointmentRequest::find($id);
+
+        if (!$cita) {
+            return response()->json(['mensaje' => 'Cita no encontrada'], 404);
+        }
+
+        // Aplica la lógica para marcar la cita como aceptada
+        $cita->state= 1;
+        $cita->save();
+
+        return response()->json(['mensaje' => 'Cita aceptada exitosamente']);
+}
+public function reprogramarCita(Request $request, $id)
+{
+    $cita = Schedule::find($id);
+
+    if (!$cita) {
+        return response()->json(['mensaje' => 'Cita no encontrada'], 404);
     }
 
-    public function destroy(Doctor $doctor)
-    {
-    }
+    // Actualiza la fecha y hora de la cita con los nuevos valores
+    $cita->current_date= $request->input('nueva_fecha');
+    $cita->save();
+
+    return response()->json(['mensaje' => 'Cita reprogramada exitosamente']);
+} */
 }

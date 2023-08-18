@@ -30,6 +30,9 @@ Route::middleware('auth:api')->group(function () {
     Route::apiResource('/appointment', AppointmentRequestCitaController::class)->only('index', 'store', 'show', 'update', 'destroy');
     Route::apiResource('/doctor', DoctorController::class)->only('index', 'update', 'destroy');
     Route::get('/doctor/{direction}/{specialty}/{schedules}', [DoctorController::class, 'show']);
+    Route::get('/doctor', [DoctorController::class, 'cancelarCita']);
+    Route::get('/doctor', [DoctorController::class, 'aceptarCita']);
+
 
     Route::apiResource('/gender', GenderController::class)->only('index', 'show', 'update', 'destroy');
     Route::apiResource('/specialties', SpecialtiesController::class)->only('index', 'show', 'update', 'destroy');
@@ -37,3 +40,5 @@ Route::middleware('auth:api')->group(function () {
     Route::apiResource('/persons', PersonaController::class)->only('index', 'store', 'show', 'update', 'destroy');
     Route::apiResource('/patient', PatientController::class)->only('index', 'store', 'show', 'update', 'destroy');
 });
+Route::get('/doctor', [DoctorController::class, 'reprogramarCita']);
+ 

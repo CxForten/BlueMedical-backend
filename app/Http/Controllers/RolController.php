@@ -23,27 +23,4 @@ class RolController extends Controller
         //
     }
 
-    /**
-     * Display the specified resource.
-     */
-    public function show(Rol $rol)
-    {
-        //
-    }
-
-    /**
-     * Update the specified resource in storage.
-     */
-    public function update(Request $request, Rol $rol)
-    {
-        //
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     */
-    public function destroy(Rol $rol)
-    {
-        //
-    }
 }
