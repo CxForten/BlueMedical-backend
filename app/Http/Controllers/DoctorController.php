@@ -3,11 +3,10 @@
 namespace App\Http\Controllers;
 
 use App\Models\Doctor;
+use App\Models\Person;
 use Exception;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
-use App\Models\AppointmentRequest;
-use App\Models\Schedule;
 
 class DoctorController extends Controller
 {
@@ -211,47 +210,61 @@ class DoctorController extends Controller
         }
     }
 
-/*     public function cancelarCita($id)
+    public function getDoctor($id)
     {
-        // Encuentra la cita por su ID
-        $cita = AppointmentRequest::find($id);
-
-        if (!$cita) {
-            return response()->json(['mensaje' => 'Cita no encontrada'], 404);
-        }
-
-        // Aplica la lógica de cancelación
-        $cita->state= 0;
-        $cita->save();
-
-        return response()->json(['mensaje' => 'Cita cancelada ']);
-}
-public function aceptarCita($id)
-    {
-        $cita = AppointmentRequest::find($id);
-
-        if (!$cita) {
-            return response()->json(['mensaje' => 'Cita no encontrada'], 404);
-        }
-
-        // Aplica la lógica para marcar la cita como aceptada
-        $cita->state= 1;
-        $cita->save();
-
-        return response()->json(['mensaje' => 'Cita aceptada exitosamente']);
-}
-public function reprogramarCita(Request $request, $id)
-{
-    $cita = Schedule::find($id);
-
-    if (!$cita) {
-        return response()->json(['mensaje' => 'Cita no encontrada'], 404);
+        $doctor = Doctor::where('idPerson', $id)->first();
+        return response()->json($doctor);
     }
 
-    // Actualiza la fecha y hora de la cita con los nuevos valores
-    $cita->current_date= $request->input('nueva_fecha');
-    $cita->save();
 
-    return response()->json(['mensaje' => 'Cita reprogramada exitosamente']);
-} */
+    public function getPatient($idDoctor)
+    {
+        $appointment = DB::table('doctor_patient')
+            ->join('patients', 'patients.id', '=', 'doctor_patient.patient_id')
+            ->join('doctors', 'doctors.id', '=', 'doctor_patient.doctor_id')
+            ->where('doctors.id', $idDoctor)
+            ->select(
+                'patients.idPerson as idPatient',
+                'doctors.idPerson as idDoctor',
+                'doctor_patient.currentDate',
+                'doctor_patient.appointmentDate',
+                'doctor_patient.description',
+                'doctor_patient.state',
+                'doctor_patient.id',
+
+            )
+            ->orderBy('doctor_patient.state')
+            ->orderByDesc('doctor_patient.id')
+            ->where('doctor_patient.state', 0)
+            ->get();
+
+        foreach ($appointment as $key => $value) {
+
+            $patient = Person::find($value->idPatient);
+            $doctor[$key] = Person::find($value->idDoctor);
+
+            $id = $value->id;
+
+
+            $appointment[$key] = [
+                'id' => $id,
+                'patient' => $patient,
+                'currentDate' => $value->currentDate,
+                'appointmentDate' => $value->appointmentDate,
+                'description' => $value->description,
+                'state' => $value->state,
+                'doctor' => $doctor[$key],
+            ];
+        }
+
+        return response()->json($appointment);
+    }
+
+    public function update(Request $request, Doctor $doctor)
+    {
+    }
+
+    public function destroy(Doctor $doctor)
+    {
+    }
 }

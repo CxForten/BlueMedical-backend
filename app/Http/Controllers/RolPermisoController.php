@@ -26,5 +26,24 @@ class RolPermisoController extends Controller
     /**
      * Display the specified resource.
      */
+    public function show(RolPermiso $rolPermiso)
+    {
+        //
+    }
 
+    /**
+     * Update the specified resource in storage.
+     */
+    public function update(Request $request, RolPermiso $rolPermiso)
+    {
+        //
+    }
+
+    /**
+     * Remove the specified resource from storage.
+     */
+    public function destroy(RolPermiso $rolPermiso)
+    {
+        //
+    }
 }
