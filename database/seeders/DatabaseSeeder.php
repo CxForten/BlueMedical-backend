@@ -20,6 +20,12 @@ class DatabaseSeeder extends Seeder
         // ]);
         $this->call([
             UserSeeder::class,
+            RolesSeed::class,
+
+            PageSeed::class,
+            PageRolSeed::class,
+
+            UserRoleSeed::class,
             GenderSeeder::class,
             SpecialtySeeder::class,
             SchedulesSeeder::class,
@@ -27,6 +33,5 @@ class DatabaseSeeder extends Seeder
             DoctorSeed::class,
             //PatientSeed::class
         ]);
-    
     }
 }
