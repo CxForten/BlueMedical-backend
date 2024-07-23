@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\PermissionRole;
 use App\Models\RolPermiso;
 use Illuminate\Http\Request;
 
@@ -26,7 +27,7 @@ class RolPermisoController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(RolPermiso $rolPermiso)
+    public function show(PermissionRole $rolPermiso)
     {
         //
     }
@@ -34,7 +35,7 @@ class RolPermisoController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, RolPermiso $rolPermiso)
+    public function update(Request $request, PermissionRole $rolPermiso)
     {
         //
     }
@@ -42,7 +43,7 @@ class RolPermisoController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(RolPermiso $rolPermiso)
+    public function destroy(PermissionRole $rolPermiso)
     {
         //
     }

@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Rol;
+use App\Models\Role;
 use Illuminate\Http\Request;
 
 class RolController extends Controller
@@ -26,7 +27,7 @@ class RolController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(Rol $rol)
+    public function show(Role $rol)
     {
         //
     }
@@ -34,7 +35,7 @@ class RolController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, Rol $rol)
+    public function update(Request $request, Role $rol)
     {
         //
     }
@@ -42,7 +43,7 @@ class RolController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(Rol $rol)
+    public function destroy(Role $rol)
     {
         //
     }

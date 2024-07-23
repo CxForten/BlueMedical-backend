@@ -18,7 +18,6 @@ return new class extends Migration
             $table->string('phone');
 
             $table->foreignId('idUser')
-                ->unique()
                 ->constrained('users')
                 ->cascadeOnDelete()
                 ->cascadeOnUpdate();
